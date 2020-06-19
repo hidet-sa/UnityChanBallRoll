@@ -9,6 +9,7 @@ TagManager:
   - A
   - B
   - StageBottom
+  - Goal
   layers:
   - Default
   - TransparentFX

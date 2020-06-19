@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     int count;
     public Text countText;
     AudioSource getSE;
+    bool goalFlag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +26,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float moveH = Input.GetAxis("Horizontal");
-        float moveV = Input.GetAxis("Vertical");
-        
-        Vector3 move = new Vector3(moveH, 0, moveV);
-        rb.AddForce(move * speed);
+        if (goalFlag == false)
+        {
+            float moveH = Input.GetAxis("Horizontal");
+            float moveV = Input.GetAxis("Vertical");
+
+            Vector3 move = new Vector3(moveH, 0, moveV);
+            rb.AddForce(move * speed);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,6 +48,11 @@ public class PlayerController : MonoBehaviour
         }
         else if(other.gameObject.CompareTag("StageBottom")) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else if(other.gameObject.CompareTag("Goal"))
+        {
+            Debug.Log("Goal!!!");
+//            goalFlag = true;
         }
     }
 
